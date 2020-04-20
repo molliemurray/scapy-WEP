@@ -1,0 +1,12 @@
+ls(Dot11WEP)
+conf.wepkey
+
+packet=Dot11WEP(Dot11Encrypted(sr1(IP(dst="192.168.3.4")/ICMP()/"Hello"))) 
+packet=Dot11WEP(Dot11Encrypted(sr1(IP(dst="192.168.3.4")/Dot11WEP()/"Hello"))) 
+
+packet=Dot11WEP(Dot11Encrypted((IP(dst="192.168.3.4")/Dot11WEP()/"Hello"))) 
+packet.encrypt 
+sendp(packet)
+packet.show()
+
+test=Dot11WEP(iv=b'\x00\x00\x00',keyid=33,wepdata="string test",icv=4)
