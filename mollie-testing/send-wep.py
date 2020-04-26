@@ -21,7 +21,9 @@ input = wepPkts.__class__(str(wepPkts)[0:-4])
 sendp(wepPkts)
 
 # Sending a simple packet
-packet=Dot11()/LLC()/SNAP()/IP(src="192.168.3.7",dst="192.168.3.5")/ICMP()/"Hello!"
+sender='08:00:27:c6:e4:20'
+dest='08:00:27:1b:8b:a3'
+packet=Dot11(addr1=dest,addr2=sender,addr3=sender)/LLC()/SNAP()/IP(src="192.168.3.7",dst="192.168.3.5")/ICMP()/"Hello!"
 print(packet.summary())
 #print(packet.show())
 sendp(packet)
@@ -33,8 +35,7 @@ sendp(encPkt)
 
 #Sending a Dot11 Beacon packet
 SSID = 'Test SSID'
-iface = 'eth0'  
-sender="08:00:27:c6:e4:20"
+iface = 'eth0'
 dot11 = Dot11(type=0, subtype=8, addr1='ff:ff:ff:ff:ff:ff',
 addr2=sender, addr3=sender)
 beacon = Dot11Beacon()
